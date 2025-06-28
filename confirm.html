@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Confirmation Page</title>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    margin: 0; padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('https://thumbs.dreamstime.com/b/high-tech-background-abstract-blue-tones-67771641.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+  }
+  #confirmationForm {
+    
+    background: rgb(233, 212, 212);
+    border-radius: 8px;
+    padding: 2rem 3rem;
+    width: 350px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .field-group {
+    margin-bottom: 1rem;
+  }
+  .field-group label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .field-group input {
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    
+    pointer-events: none;
+    background-color: #e9e9e9; 
+    color: #333;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+  }
+  button {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #backBtn {
+    background-color: #b34848; 
+    color: white;
+  }
+  #submitBtn {
+    background-color: #4CAF50; 
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<div id="confirmationForm">
+  <h2>Confirm Your Details</h2>
+
+  <div class="field-group">
+    <label for="nameInput">Name</label>
+    <input type="text" id="nameInput" />
+  </div>
+  <div class="field-group">
+    <label for="gmailInput">Gmail</label>
+    <input type="email" id="gmailInput" />
+  </div>
+  <div class="field-group">
+    <label for="passwordInput">Password</label>
+    <input type="password" id="passwordInput" />
+  </div>
+  <div class="field-group">
+    <label for="ageInput">Age</label>
+    <input type="text" id="ageInput" />
+  </div>
+  <div class="field-group">
+    <label for="mobileInput">Mobile</label>
+    <input type="text" id="mobileInput" />
+  </div>
+  <div class="field-group">
+    <label for="sscInput">SSC</label>
+    <input type="text" id="sscInput" />
+  </div>
+  <div class="field-group">
+    <label for="iddInput">Inter/Diploma</label>
+    <input type="text" id="iddInput" />
+  </div>
+  <div class="field-group">
+    <label for="ugdInput">Under Graduation</label>
+    <input type="text" id="ugdInput" />
+  </div>
+  <div class="field-group">
+    <label for="streetInput">Street</label>
+    <input type="text" id="streetInput" />
+  </div>
+  <div class="field-group">
+    <label for="cityInput">City</label>
+    <input type="text" id="cityInput" />
+  </div>
+  <div class="field-group">
+    <label for="stateInput">State</label>
+    <input type="text" id="stateInput" />
+  </div>
+  <div class="field-group">
+    <label for="pincodeInput">Pincode</label>
+    <input type="text" id="pincodeInput" />
+  </div>
+
+  <div class="buttons">
+    <button id="backBtn">Back</button>
+    <button id="submitBtn">Submit</button>
+  </div>
+</div>
+
+<script>
+  function loadDetails() {
+    document.getElementById('nameInput').value = localStorage.getItem('name') || '';
+    document.getElementById('gmailInput').value = localStorage.getItem('gmail') || '';
+
+    document.getElementById('passwordInput').value = localStorage.getItem('password') || '';
+    document.getElementById('ageInput').value = localStorage.getItem('age') || '';
+    document.getElementById('mobileInput').value = localStorage.getItem('mobile') || '';
+    document.getElementById('sscInput').value = localStorage.getItem('ssc') || '';
+    document.getElementById('iddInput').value = localStorage.getItem('idd') || '';
+    document.getElementById('ugdInput').value = localStorage.getItem('ugd') || '';
+    document.getElementById('streetInput').value = localStorage.getItem('streetname') || '';
+    document.getElementById('cityInput').value = localStorage.getItem('cityname') || '';
+    document.getElementById('stateInput').value = localStorage.getItem('statename') || '';
+    document.getElementById('pincodeInput').value = localStorage.getItem('pincode') || '';
+  }
+
+
+  window.onload = loadDetails;
+
+
+  document.getElementById('backBtn').addEventListener('click', () => {
+    window.location.href = '1st page.html'; 
+  });
+
+
+  document.getElementById('submitBtn').addEventListener('click', () => {
+
+    alert('Form submitted successfully!');
+
+    localStorage.clear();
+
+
+    window.location.href = '1st page.html';
+  });
+</script>
+
+</body>
+</html>

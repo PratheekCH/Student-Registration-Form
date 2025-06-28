@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+            body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            justify-content: center;
+            background-image: url('https://thumbs.dreamstime.com/b/high-tech-background-abstract-blue-tones-67771641.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .main-heading {
+            color: #fff; 
+            font-size: 2.5em; 
+            margin-bottom: 30px; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        #form {
+            width: 25rem; 
+            background: rgb(246, 248, 249); 
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(226, 229, 232, 0.983),
+                        0 4px 6px -2px rgba(255, 250, 250, 0.811); 
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+       
+        input[type="text"],
+        input[type="password"] { 
+            display: block;
+            width: calc(100% - 10px); 
+            padding: 8px 5px;
+            margin-bottom: 5px; 
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        table {
+            text-align: left; 
+            width: 100%; 
+            max-width: 25rem; 
+            margin-bottom: 20px; 
+        }
+
+        td {
+            padding: 8px 5px; 
+            vertical-align: top; 
+        }
+
+        td:first-child {
+            width: 35%; 
+        }
+
+        td:last-child {
+            width: 65%; 
+        }
+        .button-container {
+            display: flex;
+            justify-content: center; 
+            gap: 10px; 
+            margin-top: 20px; 
+            width: 100%; 
+        }
+
+        .button {
+            background-color: rgb(224, 212, 204);
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none; 
+            color: inherit; 
+            display: inline-block; 
+        }
+
+        .button a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        label { 
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        
+        .p-elements-container {
+            display: flex;
+            justify-content: center; 
+            width: 100%; 
+            margin-top: 20px; 
+            margin-bottom: 20px; 
+        }
+
+        .p-elements-container h6 {
+            margin: 0; 
+            color: rgb(9, 92, 12); 
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8em;
+            margin-top: 5px;
+            display: block;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div  id = "form" class="form-container">
+        <h2><center>Personal Details</center></h2>
+            <table id="table">
+                <tr id="tr">
+                    <td><label>Name:-</label></td>
+                    <td><input type="text" placeholder="Enter Full Name" id="Name"></td>
+                </tr>
+                <tr id="tr">
+                    <td><label>Age:-</label></td>
+                    <td><input type="text" placeholder="Enter Age" id="Age"></td>
+                </tr>
+                <tr>
+                    <td><label>Gender:-</label></td>
+                <td>
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label>
+
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label>
+                    </td>
+
+                </tr>
+                <tr id="tr">
+                    <td><label>Mobile No:-</label></td>
+                    <td><input type="text" placeholder="Enter Mobile No" id="Mobile"></td>
+                </tr>
+            </table>
+            <div>
+            <center>
+                <button class="button" onclick="saveAndContinue()">Continue</button></center>
+            </div>
+    </div>
+</body>
+<script>
+    window.onload = function() {
+      const savedName = localStorage.getItem('name');
+      const savedAge = localStorage.getItem('age');
+      const savedGender = localStorage.getItem('gender');
+      const savedMobile = localStorage.getItem('mobile');
+
+      if (savedName) document.getElementById('Name').value = savedName;
+      if (savedAge) document.getElementById('Age').value = savedAge;
+      if (savedMobile) document.getElementById('Mobile').value = savedMobile;
+      if (savedGender) {
+        if (savedGender === 'male') {
+          document.getElementById('male').checked = true;
+        } else if (savedGender === 'female') {
+          document.getElementById('female').checked = true;
+        }
+      }
+    };
+
+    function saveAndContinue() {
+      const name = document.getElementById('Name').value.trim();
+      const age = document.getElementById('Age').value.trim();
+      const mobile = document.getElementById('Mobile').value.trim();
+      const genderEls = document.getElementsByName('gender');
+      let gender = null;
+      for (const el of genderEls) {
+        if (el.checked) {
+          gender = el.value;
+          break;
+        }
+      }
+
+      if (!name) {
+        alert('Please enter your name.');
+        return;
+      }
+      if (!age || isNaN(age) || age <= 0) {
+        alert('Please enter a valid age.');
+        return;
+      }
+      if (!gender) {
+        alert('Please select your gender.');
+        return;
+      }
+      if (!mobile || !/^\d{10}$/.test(mobile)) {
+        alert('Please enter a valid 10-digit mobile number.');
+        return;
+      }
+
+      localStorage.setItem('name', name);
+      localStorage.setItem('age', age);
+      localStorage.setItem('gender', gender);
+      localStorage.setItem('mobile', mobile);
+      window.location.href = "3rd page.html";
+    }
+  </script>
+</html>

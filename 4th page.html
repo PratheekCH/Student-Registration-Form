@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Address Form</title>
+    <style>
+         body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            justify-content: center;
+            background-image: url('https://thumbs.dreamstime.com/b/high-tech-background-abstract-blue-tones-67771641.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .main-heading {
+            color: #fff; 
+            font-size: 2.5em; 
+            margin-bottom: 30px; 
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        #form {
+            width: 25rem; 
+            background: rgb(246, 248, 249); 
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(226, 229, 232, 0.983),
+                        0 4px 6px -2px rgba(255, 250, 250, 0.811); 
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+       
+        input[type="text"],
+        input[type="password"] { 
+            display: block;
+            width: calc(100% - 10px); 
+            padding: 8px 5px;
+            margin-bottom: 5px; 
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        table {
+            text-align: left; 
+            width: 100%; 
+            max-width: 25rem; 
+            margin-bottom: 20px; 
+        }
+
+        td {
+            padding: 8px 5px; 
+            vertical-align: top; 
+        }
+
+        td:first-child {
+            width: 35%; 
+        }
+
+        td:last-child {
+            width: 65%; 
+        }
+        .button-container {
+            display: flex;
+            justify-content: center; 
+            gap: 10px; 
+            margin-top: 20px; 
+            width: 100%; 
+        }
+
+        .button {
+            background-color: rgb(224, 212, 204);
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none; 
+            color: inherit; 
+            display: inline-block; 
+        }
+
+        .button a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        label { 
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        
+        .p-elements-container {
+            display: flex;
+            justify-content: center; 
+            width: 100%; 
+            margin-top: 20px; 
+            margin-bottom: 20px; 
+        }
+
+        .p-elements-container h6 {
+            margin: 0; 
+            color: rgb(9, 92, 12); 
+        }
+
+        .error {
+            color: red;
+            font-size: 0.8em;
+            margin-top: 5px;
+            display: block;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="form">
+        <h2><center>Address</center></h2>
+        <table>
+            <tr>
+                <td><label>Street :-</label></td>
+                <td>
+                    <input type="text" id="streetname" placeholder="Enter Street name">
+                    <span class="error" id="streetError"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><label>City :-</label></td>
+                <td>
+                    <input type="text" id="cityname" placeholder="Enter City name">
+                    <span class="error" id="citynameError"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><label>State :-</label></td>
+                <td>
+                    <input type="text" id="statename" placeholder="Enter State name">
+                    <span class="error" id="statenameError"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Pincode :-</label></td>
+                <td>
+                    <input type="text" id="pincodeno" placeholder="Enter Pincode">
+                    <span class="error" id="pincodeError"></span>
+                </td>
+            </tr>
+        </table>
+        <center><button class="button" type="submit" id="submitBtn">Submit</button></center>
+    </div>
+<script>
+    document.getElementById('submitBtn').addEventListener('click', function (e) {
+    e.preventDefault();
+
+    let street = document.getElementById('streetname').value.trim();
+    let city = document.getElementById('cityname').value.trim();
+    let state = document.getElementById('statename').value.trim();
+    let pincode = document.getElementById('pincodeno').value.trim();
+
+    document.getElementById('streetError').textContent = '';
+    document.getElementById('citynameError').textContent = '';
+    document.getElementById('statenameError').textContent = '';
+    document.getElementById('pincodeError').textContent = '';
+
+    let hasError = false;
+
+    if (!street) {
+        document.getElementById('streetError').textContent = 'Street name is required';
+        hasError = true;
+    }
+    if (!city) {
+        document.getElementById('citynameError').textContent = 'City name is required';
+        hasError = true;
+    }
+    if (!state) {
+        document.getElementById('statenameError').textContent = 'State name is required';
+        hasError = true;
+    }
+    if (!pincode || isNaN(pincode)) {
+        document.getElementById('pincodeError').textContent = 'Valid pincode is required';
+        hasError = true;
+    }
+
+    if (!hasError) {
+        localStorage.setItem('streetname', street);
+        localStorage.setItem('cityname', city);
+        localStorage.setItem('statename', state);
+        localStorage.setItem('pincode', pincode);
+        window.location.href = "confirm.html";
+    }
+});
+</script>
+<script>
+    window.onload = function() {
+    const savedStreet = localStorage.getItem('streetname');
+    const savedCity = localStorage.getItem('cityname');
+    const savedState = localStorage.getItem('statename');
+    const savedPincode = localStorage.getItem('pincode');
+
+    if (savedStreet) document.getElementById('streetname').value = savedStreet;
+    if (savedCity) document.getElementById('cityname').value = savedCity;
+    if (savedState) document.getElementById('statename').value = savedState;
+    if (savedPincode) document.getElementById('pincodeno').value = savedPincode;
+}
+
+</script>
+        <script>
+            document.getElementById("continueBtn").addEventListener("click", function() {  
+            });
+            </script>
+    
+</body>
+</html>
