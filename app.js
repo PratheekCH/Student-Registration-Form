@@ -189,7 +189,7 @@
     onReady(function(){
       loadDetails();
       const backBtn = document.getElementById('backBtn');
-      if (backBtn) backBtn.addEventListener('click', () => { window.location.href = 'index.html.html'; });
+      if (backBtn) backBtn.addEventListener('click', () => { window.location.href = 'index.html'; });
 
       const submitBtn = document.getElementById('submitBtn');
       if (submitBtn) submitBtn.addEventListener('click', () => {
@@ -217,7 +217,7 @@
         bodyEl.appendChild(success);
 
         const homeBtn = document.getElementById('successHomeBtn');
-        if (homeBtn) homeBtn.addEventListener('click', () => { window.location.href = 'index.html.html'; });
+        if (homeBtn) homeBtn.addEventListener('click', () => { window.location.href = 'index.html'; });
       });
     });
   }
